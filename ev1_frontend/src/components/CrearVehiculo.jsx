@@ -1,86 +1,76 @@
 import { useEffect, useState } from "react"
 import gestionService from "../services/gestion.service.js";
 
-export default function CreateStudent() {
-  const [rut, setRut] = useState("");
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [calle, setCalle] = useState("");
-  const [ciudad, setCiudad] = useState("");
-  const [idCarrera, setIdCarrera] = useState(-1);
+export default function CrearVehiculo() {
+  const [patente, setPatente] = useState("");
+  const [marca, setMarca] = useState("");
+  const [modelo, setModelo] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [tipoMotor, setTipoMotor] = useState("");
+  const [numeroDeAsientos, setNumeroDeAsientos] = useState(0);
+  const [anio_Fabricacion, setAnio_Fabricacion] = useState(0);
 
   const [carreras, setCarreras] = useState(null);
 
-  async function fetchCarreras() {
-    try{
-      const response = await gestionService.getCarreras();
-      setCarreras(response.data);
-    }catch(error){
-      alert("Error al obtener carreras");
-    }
-  }
-
-  useEffect(() => {
-    fetchCarreras();
-  }, [])
-
-  async function handleCrearEstudiante(e) {
+  async function handlerCrearVehiculo(e) {
     e.preventDefault();
     try{
       const response = await gestionService.crearEstudiante({
-        rut,
-        nombre,
-        apellido,
-        idCarrera,
-        calle,
-        ciudad
+        patente,
+        marca,
+        modelo,
+        tipo,
+        tipoMotor,
+        numeroDeAsientos,
+        anio_Fabricacion
       })
 
-      setRut("");
-      setNombre("");
-      setApellido("");
-      setCalle("");
-      setCiudad("");
-      setIdCarrera(-1);
+      setPatente("");
+      setMarca("");
+      setModelo("");
+      setTipo("");
+      setTipoMotor("");
+      setNumeroDeAsientos(0);
+      setAnio_Fabricacion(0);
 
-      alert("Estudiante creado con exito");
+      alert("Vehiculo ingresado con exito en el sistema");
     }catch(error) {
       console.log(error);
-      alert("Error al crear al estudiante.");
+      alert("Error al ingresar vehiculo");
     }
 
   }
 
-  function handleRutChange(event) {
-    setRut(event.target.value);
+  function handlePatenteChange(event) {
+    setPatente(event.target.value);
   }
 
   return (
     <div className="container">
-      <h1 className="mb-4">Crear estudiante</h1>
+      <h1 className="mb-4">Ingresar Vehiculo</h1>
       <form className="border row g-3 px-4">
 
         <div className="col-12">
-          <label htmlFor="rut" className="form-label">RUT</label>
+          <label htmlFor="patente" className="form-label">Patente</label>
           <input 
-            id="rut" 
+            id="patente" 
             type="text" 
             className="form-control" 
-            value={rut} 
-            onChange={handleRutChange} 
+            value={patente} 
+            onChange={handlePatenteChange} 
           />          
         </div>
 
         <div className="col-md-6 mr-md-3">
-          <label htmlFor="nombre" className="form-label">Nombre</label>
-          <input id="nombre" type="text" className="form-control" 
-          value={nombre} 
-          onChange={e => setNombre(e.target.value)} />
+          <label htmlFor="marca" className="form-label">Marca</label>
+          <input id="marca" type="text" className="form-control" 
+          value={marca} 
+          onChange={e => setMarca(e.target.value)} />
         </div>
     
         <div className="col-md-6">
-          <label htmlFor="apellido" className="form-label">Apellido</label>
-          <input id="apellido" type="text" className="form-control" value={apellido} onChange={e => setApellido(e.target.value)} />
+          <label htmlFor="modelo" className="form-label">Modelo</label>
+          <input id="modelo" type="text" className="form-control" value={modelo} onChange={e => setModelo(e.target.value)} />
         </div>
       
         
