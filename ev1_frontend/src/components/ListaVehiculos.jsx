@@ -23,6 +23,7 @@ export default function ListaVehiculos() {
  
 
       alert("Se borró el vehiculo con exito");
+      window.location.reload();
     }catch(error) {      
       alert("Error al borrar el vehiculo");
     }
@@ -61,6 +62,13 @@ export default function ListaVehiculos() {
                 <td>{vehiculo.tipoMotor}</td>
                 <td>{vehiculo.numeroDeAsientos}</td>
                 <td>{vehiculo.anio_Fabricacion}</td>
+                <td>
+                  <Link to={`/vehiculos/${vehiculo.id}`}>Ver Detalles</Link>
+                </td>
+                <td>
+                  <Link to={`/ingresos/crear/${vehiculo.id}`}>Asignar Nuevo Ingreso</Link>
+                </td>
+                
                 <td> <button 
                type="button" 
                className="btn btn-sm btn-danger btn-solid" 
