@@ -112,6 +112,10 @@ export default function VehiculoView() {
                                                 <td>{ingreso.horaSalida}</td>
                                                 <td>{ingreso.fechaRecogida}</td>
                                                 <td>{ingreso.horaRecogida}</td>
+
+                                                <td>
+                                                    <Link to={`/ingresos/${ingreso.id}`}><button type="bbutton" className="btn btn-primary btn-sm"> Ver detalles </button></Link>
+                                                </td>
                                                 <td> <button 
                                                         type="button" 
                                                         className="btn btn-sm btn-danger btn-solid" 
@@ -120,9 +124,7 @@ export default function VehiculoView() {
                                                         Borrar Ingreso
                                                     </button>
                                                 </td>
-                                                <td>
-                                                    <Link to={`/ingresos/${ingreso.id}`}>Ver Detalles</Link>
-                                                </td>
+                                               
 
                                             </tr>
                                             

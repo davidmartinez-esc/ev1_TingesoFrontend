@@ -63,10 +63,12 @@ export default function ListaVehiculos() {
                 <td>{vehiculo.numeroDeAsientos}</td>
                 <td>{vehiculo.anio_Fabricacion}</td>
                 <td>
-                  <Link to={`/vehiculos/${vehiculo.id}`}>Ver Detalles</Link>
+                  
+                  <Link to={`/vehiculos/${vehiculo.id}`}> <button type="bbutton" className="btn btn-primary btn-sm">Ver Detalles</button></Link>
+                  
                 </td>
                 <td>
-                  <Link to={`/ingresos/crear/${vehiculo.id}`}>Asignar Nuevo Ingreso</Link>
+                  <Link to={`/ingresos/crear/${vehiculo.id}`}><button type="bbutton" className="btn btn-success btn-sm">Asignar Nuevo Ingreso</button></Link>
                 </td>
                 
                 <td> <button 

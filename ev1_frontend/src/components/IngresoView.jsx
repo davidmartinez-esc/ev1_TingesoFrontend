@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import gestionService from "../services/gestion.service";
 
+import rdrService from "../services/reparacionesDecuentosRecargos.service";
+import gestionService from "../services/gestion.service";
 export default function IngresoView() {
     const {idIngreso} = useParams();
+
+    const [reparaciones, setReparaciones] = useState([]);
+
 
     const [ingresos, setIngresos] = useState([]);
 
@@ -17,6 +21,17 @@ export default function IngresoView() {
                             
         }catch(error) {
             alert("Error al obtener al ingreso");
+        }
+    }
+
+    async function fetchReparaciones() {    
+        try{
+            const response = await rdrService.getReparacionesByIdIngreso(idIngreso)            
+            setReparaciones(response.data);  
+            console.log(response.data); 
+                            
+        }catch(error) {
+            alert("Error al obtener el vehiculo");
         }
     }
 
@@ -47,6 +62,7 @@ export default function IngresoView() {
 
     useEffect(() => {
         fetchIngreso();
+        fetchReparaciones();
     }, [])
 
     return(
@@ -83,7 +99,33 @@ export default function IngresoView() {
                             </tr>
                             </tbody>
                         </table>
-                        
+                            
+                            <div className="container">
+                                        <h2 className="text-center">Reparaciones Por Ingreso</h2>
+                                    
+                                        <table className="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">NOMBRE DE LA REP</th>
+                                                <th scope="col">PRECIO DE LA REPRACION</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>        
+                                            {                                 
+                                                reparaciones.map((reparacion, index) => (
+                                                <tr key={index}>
+                                                    <td>{reparacion.id}</td>
+                                                    <td>{reparacion.nombreDeLaRep}</td>
+                                                    <td>{reparacion.precioDeLaReparacion}</td>
+
+                                                </tr>
+                                                
+                                                ))
+                                            }
+                                            </tbody>
+                                        </table>
+                            </div> 
 
                         
                     </div>
