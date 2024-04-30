@@ -1,30 +1,14 @@
 import axios from "axios";
 
-const ESTUDIANTES_API_URL = "http://localhost:8050/api/estudiantes";
-const CARRERAS_API_URL = "http://localhost:8050/api/carreras";
-
-const VEHICULOS_GET_API_URL = "http://localhost:8050/api/v1/vehiculo/";
-const VEHICULO_POST_API_URL = "http://localhost:8050/api/v1/vehiculo/save";
-
-const INGRESOS_API_URL = "http://localhost:8050/api/v1/ingresoAReparacion/";
 
 
+const VEHICULOS_GET_API_URL = "http://191.232.38.14:8050/api/v1/vehiculo/";
+const VEHICULO_POST_API_URL = "http://191.232.38.14:8050/api/v1/vehiculo/save";
 
-function crearEstudiante(estudiante) {
-  return axios.post(ESTUDIANTES_API_URL, estudiante);  
-}
+const INGRESOS_API_URL = "http://191.232.38.14:8050/api/v1/ingresoAReparacion/";
 
-function getEstudiantes() {
-  return axios.get(ESTUDIANTES_API_URL)
-}
 
-function getEstudiante(rutEstudiante) {  
-  return axios.get(`${ESTUDIANTES_API_URL}/${rutEstudiante}`)
-}
 
-function getCarreras() {
-  return axios.get(CARRERAS_API_URL);
-}
 
 function getVehiculos(){
   return axios.get(VEHICULOS_GET_API_URL);

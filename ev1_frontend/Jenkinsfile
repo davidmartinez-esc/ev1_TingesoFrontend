@@ -15,8 +15,8 @@ pipeline{
                 dir("ev1_frontend"){
                     script{
                          withDockerRegistry(credentialsId: 'docker-credentials'){
-                            bat "docker build -t dddavidesc/imagen-semifinal-frontend ."
-                            bat "docker push dddavidesc/imagen-semifinal-frontend"
+                            bat "docker build -t dddavidesc/imagen-frontend-web ."
+                            bat "docker push dddavidesc/imagen-frontend-web"
                         }
                     }                    
                 }
