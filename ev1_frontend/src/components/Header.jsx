@@ -15,7 +15,7 @@ export default function Header () {
             <Link className="nav-link" to="/vehiculos">Lista Vehiculos </Link>
                 </li>
             <li className="nav-item">
-            <Link className="nav-link" to="/vehiculos/ingresar">Crear Vehiculo</Link>
+            <Link className="nav-link" to="/vehiculos/ingresar">Crear Automovil</Link>
             </li>
             
           </ul>
