@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const ESTUDIANTES_API_URL = "http://localhost:80/api/estudiantes";
-const CARRERAS_API_URL = "http://localhost:80/api/carreras";
+const ESTUDIANTES_API_URL = "http://localhost:8050/api/estudiantes";
+const CARRERAS_API_URL = "http://localhost:8050/api/carreras";
 
-const VEHICULOS_GET_API_URL = "http://localhost:8080/api/v1/vehiculo/";
-const VEHICULO_POST_API_URL = "http://localhost:8080/api/v1/vehiculo/save";
+const VEHICULOS_GET_API_URL = "http://localhost:8050/api/v1/vehiculo/";
+const VEHICULO_POST_API_URL = "http://localhost:8050/api/v1/vehiculo/save";
 
-const REPARACIONES_API_URL = "http://localhost:8080/api/v1/repEspecifica";
+const REPARACIONES_API_URL = "http://localhost:8050/api/v1/repEspecifica";
 
 
 
