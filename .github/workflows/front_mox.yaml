@@ -26,7 +26,7 @@ jobs:
 
       - name: Ejecutar OWASP Dependency-Check
         run: |
-          ./bin/dependency-check.sh --project "my-project" --scan . --out ./dependency-check-report
+          ./bin/dependency-check.sh --project "my-project" --scan ev1_frontend --out ./dependency-check-report
 
       - name: Subir el reporte como artefacto
         uses: actions/upload-artifact@v3
