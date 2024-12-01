@@ -28,13 +28,13 @@ jobs:
         run: |
           wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
           unzip dependency-check-8.0.0-release.zip
-          cd dependency-check
+          cd dependency-check/bin
           ls
           pwd
 
       - name: Ejecutar OWASP Dependency-Check
         run: |
-          bin/dependency-check.sh --project "my-project" --scan ev1_frontend/package-lock.json --out ./dependency-check-report --nvdApiKey ${{ secrets.NVD_KEY }} 
+          dependency-check.sh --project "my-project" --scan ../ev1_frontend/package-lock.json --out ./dependency-check-report --nvdApiKey ${{ secrets.NVD_KEY }} 
 
       - name: Subir el reporte como artefacto
         uses: actions/upload-artifact@v3
