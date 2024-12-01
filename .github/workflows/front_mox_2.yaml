@@ -20,7 +20,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16' # Usa la versión de Java que corresponda a tu proyecto
-
+      - name: Install dependencies
+        working-directory: ev1_frontend
+        run: |
+          npm install  
       - name: Descargar OWASP Dependency-Check
         run: |
           wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
@@ -29,10 +32,10 @@ jobs:
 
       - name: Ejecutar OWASP Dependency-Check
         run: |
-          ./bin/dependency-check.sh --project "my-project" --scan . --out ./dependency-check-report
+          ./bin/dependency-check.sh --project "my-project" --scan ev1_frontend/package-lock.json --out ./dependency-check-report --nvdApiKey ${{ secrets.NVD_KEY }} 
 
       - name: Subir el reporte como artefacto
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dependency-check-report
           path: ./dependency-check-report
