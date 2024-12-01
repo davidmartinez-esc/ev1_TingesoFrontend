@@ -37,7 +37,7 @@ jobs:
           /home/runner/work/ev1_TingesoFrontend/ev1_TingesoFrontend/dependency-check/bin/dependency-check.sh --project "my-project" --scan /home/runner/work/ev1_TingesoFrontend/ev1_TingesoFrontend/ev1_frontend/package-lock.json --out ./dependency-check-report --nvdApiKey ${{ secrets.NVD_KEY }} 
 
       - name: Subir el reporte como artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
           path: ./dependency-check-report
