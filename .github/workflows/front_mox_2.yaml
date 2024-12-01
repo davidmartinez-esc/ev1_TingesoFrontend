@@ -1,0 +1,38 @@
+name: OWASP Depedency Descargando de Github
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  owasp-dependency-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Usa la versión de Java que corresponda a tu proyecto
+
+      - name: Descargar OWASP Dependency-Check
+        run: |
+          wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
+          unzip dependency-check-8.0.0-release.zip
+          cd dependency-check
+
+      - name: Ejecutar OWASP Dependency-Check
+        run: |
+          ./bin/dependency-check.sh --project "my-project" --scan . --out ./dependency-check-report
+
+      - name: Subir el reporte como artefacto
+        uses: actions/upload-artifact@v2
+        with:
+          name: dependency-check-report
+          path: ./dependency-check-report
