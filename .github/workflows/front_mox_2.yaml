@@ -26,8 +26,8 @@ jobs:
           npm install  
       - name: Descargar OWASP Dependency-Check
         run: |
-          wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
-          unzip dependency-check-8.0.0-release.zip
+          curl -Ls "https://github.com/jeremylong/DependencyCheck/releases/download/v11.1.0/dependency-check-11.1.0-release.zip" --output dependency-check.zip
+          unzip dependency-check.zip
           cd dependency-check/bin
           ls
           pwd
