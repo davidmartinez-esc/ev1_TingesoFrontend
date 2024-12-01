@@ -31,7 +31,7 @@ jobs:
 
       - name: Ejecutar OWASP Dependency-Check en el proyecto Node.js
         working-directory: ev1_frontend  # Cambia "demo" por el directorio donde está tu pom.xml
-        run: npx owasp-dependency-check --project "node-project" --scan ev1_frontend/node_modules --out ./dependency-check-report
+        run: npx owasp-dependency-check --project "node-project" --scan . --out ./dependency-check-report
 
       - name: Subir el reporte como artefacto
         uses: actions/upload-artifact@v3
