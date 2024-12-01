@@ -29,6 +29,8 @@ jobs:
           wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.0.0/dependency-check-8.0.0-release.zip
           unzip dependency-check-8.0.0-release.zip
           cd dependency-check
+          ls
+          pwd
 
       - name: Ejecutar OWASP Dependency-Check
         run: |
