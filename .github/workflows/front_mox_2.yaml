@@ -34,7 +34,7 @@ jobs:
 
       - name: Ejecutar OWASP Dependency-Check
         run: |
-          ./dependency-check.sh --project "my-project" --scan ../ev1_frontend/package-lock.json --out ./dependency-check-report --nvdApiKey ${{ secrets.NVD_KEY }} 
+          /home/runner/work/ev1_TingesoFrontend/ev1_TingesoFrontend/dependency-check/bin/dependency-check.sh --project "my-project" --scan ../ev1_frontend/package-lock.json --out ./dependency-check-report --nvdApiKey ${{ secrets.NVD_KEY }} 
 
       - name: Subir el reporte como artefacto
         uses: actions/upload-artifact@v3
