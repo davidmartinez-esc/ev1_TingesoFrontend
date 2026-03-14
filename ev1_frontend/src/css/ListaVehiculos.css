@@ -1,0 +1,36 @@
+.table-separate {
+  border-collapse: separate !important;
+  border-spacing: 0 15px !important; /* Espacio vertical entre "tarjetas" */
+}
+
+.card-row {
+  background-color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto al pasar el mouse */
+.card-row:hover {
+  transform: translateY(-3px); /* Pequeño salto hacia arriba */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
+  z-index: 10;
+}
+
+/* Estilo para las celdas para que parezcan una sola tarjeta */
+.card-row td {
+  border-top: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #dee2e6 !important;
+  padding: 15px 10px;
+}
+
+/* Redondear las esquinas de la "tarjeta" */
+.card-row td:first-child {
+  border-left: 1px solid #dee2e6 !important;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.card-row td:last-child {
+  border-right: 1px solid #dee2e6 !important;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}

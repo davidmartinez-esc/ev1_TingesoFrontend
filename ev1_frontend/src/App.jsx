@@ -12,7 +12,6 @@ import VehiculoView from './components/VehiculoView.jsx'
 import IngresoView from './components/IngresoView.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
       <BrowserRouter>

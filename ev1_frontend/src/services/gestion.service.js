@@ -2,10 +2,10 @@ import axios from "axios";
 
 
 
-const VEHICULOS_GET_API_URL = "http://191.232.38.14:8050/api/v1/vehiculo/";
-const VEHICULO_POST_API_URL = "http://191.232.38.14:8050/api/v1/vehiculo/save";
+const VEHICULOS_GET_API_URL = "http://localhost:8090/api/v1/vehiculo/";
+const VEHICULO_POST_API_URL = "http://localhost:8090/api/v1/vehiculo/save";
 
-const INGRESOS_API_URL = "http://191.232.38.14:8050/api/v1/ingresoAReparacion/";
+const INGRESOS_API_URL = "http://localhost:8090/api/v1/ingresoAReparacion/";
 
 
 

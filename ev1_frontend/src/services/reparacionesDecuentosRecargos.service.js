@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const REPARACIONES_API_URL = "http://191.232.38.14:8050/api/v1/repEspecifica";
+const REPARACIONES_API_URL = "http://localhost:8090/api/v1/repEspecifica";
 
 
 function getReparacionesByIdIngreso(idIngreso) {  
