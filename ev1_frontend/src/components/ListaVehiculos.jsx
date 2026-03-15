@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import gestionService from "../services/gestion.service.js";
 import { Link } from "react-router-dom";
 import '../css/ListaVehiculos.css'
-
+import { useNavigate } from "react-router-dom";
 export default function ListaVehiculos() {
   const [vehiculos, setVehiculos] = useState([]);
-
+  const navigate = useNavigate();
   async function fetchVehiculos() {
     try{      
       const response = await gestionService.getVehiculos();  
@@ -37,8 +37,8 @@ export default function ListaVehiculos() {
     <div className="container">
       <h1>Lista de Vehiculos</h1>
   
-      <table className="table table-separate"> {/* Clase personalizada aquí */}
-        <thead>
+      <table className="table table-separate "> {/* Clase personalizada aquí */}
+        <thead className="table-info">
           <tr>
             <th scope='col' >ID</th>
             <th scope='col' >PATENTE</th>
@@ -48,12 +48,15 @@ export default function ListaVehiculos() {
             <th scope='col' >TIPO DE MOTOR</th>
             <th scope='col' >ASIENTOS</th>
             <th scope='col' >AÑO</th>
-            <th scope='col' colSpan="3" className="text-center">ACCIONES</th>
+            <th className="text-center"scope='col' colSpan="3" >ACCIONES</th>
           </tr>
         </thead>
         <tbody>        
           {vehiculos.map((vehiculo, index) => (
-            <tr key={index} className="shadow-sm card-row"> {/* Clase card-row personalizada */}
+            <tr key={index} className="shadow-sm card-row"
+            onClick={() => navigate(`/vehiculos/${vehiculo.id}`)}
+            style={{ cursor: 'pointer' }}
+            > 
               <td className="align-middle">{vehiculo.id}</td>
               <td className="align-middle">{vehiculo.patente}</td>
               <td className="align-middle">{vehiculo.marca}</td>
@@ -64,9 +67,12 @@ export default function ListaVehiculos() {
               <td className="align-middle">{vehiculo.anio_Fabricacion}</td>
               <td className="align-middle text-middle" colSpan="3">
                 <div className="d-flex gap-2 justify-content-center">
-                    <Link to={`/vehiculos/${vehiculo.id}`} className="btn btn-primary btn-sm">Ver</Link>
-                    <Link to={`/ingresos/crear/${vehiculo.id}`} className="btn btn-success btn-sm">Asignar</Link>
-                    <button className="btn btn-sm btn-danger" onClick={() => deleteVehiculoHandler(vehiculo.id)}>Borrar</button>
+                    <Link to={`/ingresos/crear/${vehiculo.id}`} onClick={(e) => e.stopPropagation()} className="btn btn-success btn-sm">Ingresar</Link>
+                    <button className="btn btn-sm btn-danger" onClick={() => {
+                      e.stopPropagation();
+                      deleteVehiculoHandler(vehiculo.id);}
+                      }>
+                      Borrar</button>
                 </div>
               </td>
             </tr>

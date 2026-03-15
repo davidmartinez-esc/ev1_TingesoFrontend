@@ -7,7 +7,7 @@ export default function Header () {
       <nav className="navbar navbar-expand-lg b-body-tertiary mb-3 bg-info rounded-4 ps-5 pe-5 py-0">
         <div className="container-fluid ">
           <img className="me-3 " src={carLogo} alt="" />
-          <a className="navbar-brand" href="/">Gestion Vehiculos</a>
+          <a className="navbar-brand fs-4 text-white" href="/">Gestion Vehiculos</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -19,7 +19,7 @@ export default function Header () {
                   style={{ height: '70px' }}
                   end // <--- CRUCIAL: evita que se quede activo cuando vas a /ingresar
                   className={({ isActive }) => 
-                    `nav-link d-flex align-items-center ${isActive ? "active border-bottom border-white border-5 " : ""}`
+                    `nav-link  text-white fs-5 d-flex align-items-center ${isActive ? "active text-white fs-5 border-bottom border-white border-5 " : ""}`
                   }
                 >
                   Lista Vehiculos
@@ -31,7 +31,7 @@ export default function Header () {
                   to="/vehiculos/ingresar"
                   style={{ height: '70px' }}
                   className={({ isActive }) => 
-                    `nav-link d-flex align-items-center ${isActive ? "active border-bottom border-white border-5 " : ""}`
+                    `nav-link  text-white fs-5 d-flex align-items-center ${isActive ? "active text-white fs-5 border-bottom border-white border-5 " : ""}`
                   }
                 >
                   Crear Automovil

@@ -34,3 +34,12 @@
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+
+.custom-table-header {
+  background-color: #2596be !important; /* Un morado personalizado */
+}
+
+.custom-header th {
+  background-color: #2ecc71;
+  color: white;
+}
