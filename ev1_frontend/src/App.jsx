@@ -5,7 +5,6 @@ import Header from './components/Header'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import ListaVehiculos from './components/ListaVehiculos.jsx'
-import CrearVehiculo from './components/CrearVehiculo.jsx'
 import CrearVehiculoRefactor from './components/CrearVehiculoRefactor.jsx'
 import CrearIngresoRefactor from './components/CrearIngresoRefactor.jsx'
 import VehiculoView from './components/VehiculoView.jsx'

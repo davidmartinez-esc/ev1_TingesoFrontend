@@ -34,7 +34,7 @@ export default function Header () {
                     `nav-link  text-white fs-5 d-flex align-items-center ${isActive ? "active text-white fs-5 border-bottom border-white border-5 " : ""}`
                   }
                 >
-                  Crear Automovil
+                  Registrar Automovil
                 </NavLink>
               </li>
             </ul>

@@ -45,9 +45,9 @@ export default function CrearVehiculoRefactor() {
 
   return (
     <div className="container">
-      <h1 className="mb-4">Ingresar Vehiculo</h1>
+      <h1 className="mb-4">Registrar Automovil</h1>
       <form className="border row g-3 px-4">
-        <div className="col-12">
+        <div className="col-md-6">
           <label 
             htmlFor="patente" 
             className="form-label"
@@ -141,7 +141,7 @@ export default function CrearVehiculoRefactor() {
             </select>
         </div>
 
-        <div className="col-12">
+        <div className="col-md-2">
           <label 
             htmlFor="numeroDeAsientos" 
             className="form-label"
@@ -156,7 +156,7 @@ export default function CrearVehiculoRefactor() {
           onChange={onChangeVehiculoHandler} />
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-4">
           <label 
             htmlFor="anio_Fabricacion" 
             className="form-label"

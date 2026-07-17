@@ -9,6 +9,12 @@ export default function VehiculoView() {
 
     const [vehiculo, setVehiculo] = useState(null);
 
+    const formatearFecha=(fechaISO)=>{
+        if (!fechaISO) return "-";
+                const [año, mes, dia] = fechaISO.split("-");
+                return `${dia}/${mes}/${año}`;
+    }
+
     async function fetchVehiculo() {    
         try{
             const response = await gestionService.getVehiculoById(idVehiculo)            
@@ -117,11 +123,11 @@ export default function VehiculoView() {
                                         <tr key={index} className="shadow-sm card-row">
                                             <td>{ingreso.idVehiculo}</td>
                                             <td>${ingreso.costoTotal}</td>
-                                            <td>{ingreso.fechaIngreso}</td>
+                                            <td>{formatearFecha(ingreso.fechaIngreso)}</td>
                                             <td>{ingreso.horaIngreso}</td>
-                                            <td>{ingreso.fechaSalida}</td>
+                                            <td>{formatearFecha(ingreso.fechaSalida)}</td>
                                             <td>{ingreso.horaSalida}</td>
-                                            <td>{ingreso.fechaRecogida}</td>
+                                            <td>{formatearFecha(ingreso.fechaRecogida)}</td>
                                             <td>{ingreso.horaRecogida}</td>
                                             <td>
                                                 <div className="d-flex gap-2 justify-content-center">

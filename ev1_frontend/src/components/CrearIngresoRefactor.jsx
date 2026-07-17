@@ -60,7 +60,7 @@ export default function CrearIngresoRefactor() {
           <label htmlFor="fechaIngreso" className="form-label">Fecha Ingreso</label>
           <input 
             id="fechaIngreso" 
-            type="text" 
+            type="date" 
             className="form-control" 
             value={fechaIngreso} 
             onChange={e => setFechaIngreso(e.target.value)} 
@@ -69,30 +69,30 @@ export default function CrearIngresoRefactor() {
 
         <div className="col-md-6 mr-md-3">
           <label htmlFor="horaIngreso" className="form-label">Hora Ingreso</label>
-          <input id="horaIngreso" type="text" className="form-control" 
+          <input id="horaIngreso" type="time" className="form-control" 
           value={horaIngreso} 
           onChange={e => setHoraIngreso(e.target.value)} />
         </div>
     
         <div className="col-md-6">
           <label htmlFor="fechaSalida" className="form-label">Fecha Salida</label>
-          <input id="fechaSalida" type="text" className="form-control" value={fechaSalida} onChange={e => setFechaSalida(e.target.value)} />
+          <input id="fechaSalida" type="date" className="form-control" value={fechaSalida} onChange={e => setFechaSalida(e.target.value)} />
         </div>
       
         
         <div className="col-md-6">
           <label htmlFor="horaSalida" className="form-label">Hora Salida</label>
-          <input id="horaSalida" type="text" className="form-control" value={horaSalida} onChange={e => setHoraSalida(e.target.value)} />
+          <input id="horaSalida" type="time" className="form-control" value={horaSalida} onChange={e => setHoraSalida(e.target.value)} />
         </div>
 
         <div className="col-md-6">
           <label htmlFor="fechaRecogida" className="form-label">Fecha Recogida</label>
-          <input id="fechaRecogida" type="text" className="form-control" value={fechaRecogida} onChange={e => setFechaRecogida(e.target.value)} />
+          <input id="fechaRecogida" type="date" className="form-control" value={fechaRecogida} onChange={e => setFechaRecogida(e.target.value)} />
         </div>
 
         <div className="col-md-6">
           <label htmlFor="horaRecogida" className="form-label">Hora Recogida</label>
-          <input id="horaRecogida" type="text" className="form-control" value={horaRecogida} onChange={e => setHoraRecogida(e.target.value)} />
+          <input id="horaRecogida" type="time" className="form-control" value={horaRecogida} onChange={e => setHoraRecogida(e.target.value)} />
         
         </div>
 

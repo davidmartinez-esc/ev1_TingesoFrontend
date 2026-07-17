@@ -13,6 +13,11 @@ export default function IngresoView() {
 
     const [ingreso, setIngreso] = useState(null);
 
+    const formatearFecha=(fechaISO)=>{
+        if (!fechaISO) return "-";
+                const [año, mes, dia] = fechaISO.split("-");
+                return `${dia}/${mes}/${año}`;
+    }
     async function fetchIngreso() {    
         try{
             const response = await gestionService.getIngresoById(idIngreso)            
@@ -77,20 +82,17 @@ export default function IngresoView() {
                         <div className="card-body">
                                 <div className="row g-3">
                                     <div className="col-md-4">
-                                        <p className="mb-1 text-muted small text-uppercase">Marca y Modelo</p>
-                                        <h5 className="fw-bold">{ingreso.fechaIngreso} {ingreso.horaIngreso}</h5>
+                                        <p className="mb-1 text-muted small text-uppercase">Fecha y hora ingreso</p>
+                                        <h5 className="fw-bold">{formatearFecha(ingreso.fechaIngreso)} {ingreso.horaIngreso}</h5>
                                     </div>
                                     <div className="col-md-4">
-                                        <p className="mb-1 text-muted small text-uppercase">Patente</p>
-                                        <h5 className="text-uppercase">{ingreso.fechaSalida}</h5>
+                                        <p className="mb-1 text-muted small text-uppercase">Fecha y hora salida</p>
+                                        <h5 className="fw-bold">{formatearFecha(ingreso.fechaSalida)} {ingreso.horaSalida}</h5>
                                     </div>
                                     <div className="col-md-4">
-                                        <p className="mb-1 text-muted small text-uppercase">Año</p>
-                                        <h5>{ingreso.horaSalida}</h5>
+                                        <p className="mb-1 text-muted small text-uppercase">Fecha y hora recogida</p>
+                                        <h5 className="fw-bold">{formatearFecha(ingreso.fechaRecogida)} {ingreso.horaRecogida}</h5>
                                     </div>
-
-                                    <hr className="my-2 text-muted opacity-25" />
-
                                 </div>
                             </div>
                         </div>
@@ -127,7 +129,7 @@ export default function IngresoView() {
                         :
                         (
                             <div className="text-center">
-                                <h3 className="mt-2">El vehiculo nunca ha sido ingresado</h3>
+                                <h3 className="mt-2">No se han asignado reparaciones</h3>
                             </div>
                         )
                         }
