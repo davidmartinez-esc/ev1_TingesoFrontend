@@ -9,6 +9,7 @@ export default function IngresoView() {
     const [reparaciones, setReparaciones] = useState([]);
     const [reparacionesDisponibles, setReparacionesDisponibles] = useState([]);
     const [reparacionSeleccionada, setReparacionSeleccionada] = useState(0);
+    const [cargando, setCargando] = useState(false);
 
 
     const [ingresos, setIngresos] = useState([]);
@@ -42,7 +43,7 @@ export default function IngresoView() {
 
     async function fetchReparaciones() {    
         try{
-            const response = await rdrService.getReparacionesByIdIngreso(idIngreso)            
+            const response = await rdrService.getReparacionesByIdIngreso(parseInt(idIngreso))            
             setReparaciones(response.data);  
             console.log(response.data); 
                             
@@ -50,7 +51,23 @@ export default function IngresoView() {
             alert("Error al obtener las reparaciones del ingreso");
         }
     }
+    async function handleAsignarReparacion(e) {
+        e.preventDefault();
+        setCargando(true)
+        try{
+        const response = await rdrService.asignarReparacionesAIngreso(parseInt(idIngreso),parseInt(reparacionSeleccionada.repId))
 
+        setReparacionSeleccionada(0);
+        alert("Reparación guardada con exito");
+
+        }catch(error) {
+        console.log(error);
+        alert("Error al crear la reparacion.");
+        }finally{
+            setCargando(false)
+        }
+
+    }
     async function fetchReparacionesDisponibles() {    
         try{
             const response = await rdrService.getReparacionesDisponiblesByIdIngreso(idIngreso)            
@@ -95,7 +112,7 @@ export default function IngresoView() {
                             </div>
                         </div>
 
-                        <h2 className="text-center mb-4">Reparaciones en el ingreso</h2>
+                        <h2 className="text-center mb-4">Reparaciones asignadas</h2>
                         {reparaciones.length>0 ? 
                         ( 
                         <div className="table-responsive shadow-sm">
@@ -117,7 +134,6 @@ export default function IngresoView() {
                                     {reparaciones.map((reparacion, index) => (
                                         <tr key={index} className="shadow-sm card-row">
                                             <td>{reparacion.nombreDeLaRep}</td>
-                                            <td>{reparacion.precioDeLaReparacion}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -151,6 +167,16 @@ export default function IngresoView() {
                                 {reparacionSeleccionada && (
                                         <div className="mt-3 text-success">
                                         <strong>Precio: </strong> ${reparacionSeleccionada.precio}
+                                        <div className="mt-2">
+                                            <button 
+                                                type="button" 
+                                                className="btn btn-primary"
+                                                onClick={handleAsignarReparacion}
+                                                disabled={cargando}
+                                            >
+                                                {cargando ? "Guardando..." : "Asignar Reparación"}
+                                            </button>
+                                            </div>
                                         </div>
                                     )}
                             </div>
