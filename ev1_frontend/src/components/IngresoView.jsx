@@ -7,6 +7,8 @@ export default function IngresoView() {
     const {idIngreso} = useParams();
 
     const [reparaciones, setReparaciones] = useState([]);
+    const [reparacionesDisponibles, setReparacionesDisponibles] = useState([]);
+    const [reparacionSeleccionada, setReparacionSeleccionada] = useState(0);
 
 
     const [ingresos, setIngresos] = useState([]);
@@ -18,6 +20,15 @@ export default function IngresoView() {
                 const [año, mes, dia] = fechaISO.split("-");
                 return `${dia}/${mes}/${año}`;
     }
+    const handleReparacionChange = (e) => {
+        const idSeleccionado = e.target.value;
+        
+        const reparacionEncontrada = reparacionesDisponibles.find(
+        (r) => r.repId === parseInt(idSeleccionado)
+        );
+
+        setReparacionSeleccionada(reparacionEncontrada || null);
+    };
     async function fetchIngreso() {    
         try{
             const response = await gestionService.getIngresoById(idIngreso)            
@@ -36,38 +47,25 @@ export default function IngresoView() {
             console.log(response.data); 
                             
         }catch(error) {
-            alert("Error al obtener el vehiculo");
+            alert("Error al obtener las reparaciones del ingreso");
         }
     }
 
-    async function deleteIngresoHandler(id) {
-        //console.log(vehiculo);
-        try{      
-          const response = await gestionService.deleteIngreso(id);
-    
-     
-    
-          alert("Se borró el ingreso a reparacion con exito");
-          window.location.reload();
-        }catch(error) {      
-          alert("Error al borrar el ingreso a reparacion");
-        }
-      }
-
-    async function fetchIngresos() {
-        try{      
-          const response = await gestionService.getIngresosByIdVehiculo(idVehiculo);  
-          setIngresos(response.data);
+    async function fetchReparacionesDisponibles() {    
+        try{
+            const response = await rdrService.getReparacionesDisponiblesByIdIngreso(idIngreso)            
+            setReparacionesDisponibles(response.data);  
+            console.log(response.data); 
+                            
         }catch(error) {
-          alert("Error al obtener a los ingresos a reparacion.");
+            alert("Error al obtener las reparaciones disponibles");
         }
-      }
-
-      
+    }
 
     useEffect(() => {
         fetchIngreso();
         fetchReparaciones();
+        fetchReparacionesDisponibles();
     }, [])
 
     return(
@@ -130,6 +128,31 @@ export default function IngresoView() {
                         (
                             <div className="text-center">
                                 <h3 className="mt-2">No se han asignado reparaciones</h3>
+                                <div className="mt-3">
+                                        <label htmlFor="select-reparacion" className="form-label d-block">
+                                        Selecciona una reparación:
+                                        </label>
+                                        
+                                        <select 
+                                        id="select-reparacion"
+                                        className="form-select w-50 mx-auto" 
+                                        value={reparacionSeleccionada ? reparacionSeleccionada.repId:""}
+                                        onChange={handleReparacionChange}
+                                        >
+                                        <option value="">-- Seleccionar --</option>
+                                        
+                                        {reparacionesDisponibles.map((reparacion) => (
+                                            <option key={reparacion.repId} value={reparacion.repId}>
+                                            {reparacion.nombreDeLaRep} - ${reparacion.precio}
+                                            </option>
+                                        ))}
+                                        </select>
+                                </div>
+                                {reparacionSeleccionada && (
+                                        <div className="mt-3 text-success">
+                                        <strong>Precio: </strong> ${reparacionSeleccionada.precio}
+                                        </div>
+                                    )}
                             </div>
                         )
                         }
