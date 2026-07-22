@@ -59,7 +59,7 @@ export default function IngresoView() {
 
         setReparacionSeleccionada(0);
         alert("Reparación guardada con exito");
-
+        await fetchReparaciones();
         }catch(error) {
         console.log(error);
         alert("Error al crear la reparacion.");
@@ -114,25 +114,17 @@ export default function IngresoView() {
 
                         <h2 className="text-center mb-4">Reparaciones asignadas</h2>
                         {reparaciones.length>0 ? 
-                        ( 
+                        (
                         <div className="table-responsive shadow-sm">
                             <table className="table table-hover align-middle">
                                 <thead className="table-info">
                                     <tr>
-                                        <th>ID VEHICULO</th>
-                                        <th>COSTO TOTAL</th>
-                                        <th>FECHA INGRESO</th>
-                                        <th>HORA INGRESO</th>
-                                        <th>FECHA SALIDA</th>
-                                        <th>HORA SALIDA</th>
-                                        <th>FECHA RECOGIDA</th>
-                                        <th>HORA RECOGIDA</th>
-                                        <th className="text-center">ACCIONES</th>
+                                        <th>REPARACIONES</th>
                                     </tr>
                                 </thead>
-                                <tbody>        
+                                <tbody>     
                                     {reparaciones.map((reparacion, index) => (
-                                        <tr key={index} className="shadow-sm card-row">
+                                        <tr key={reparacion.repId || index} className="shadow-sm card-row">
                                             <td>{reparacion.nombreDeLaRep}</td>
                                         </tr>
                                     ))}
@@ -144,6 +136,10 @@ export default function IngresoView() {
                         (
                             <div className="text-center">
                                 <h3 className="mt-2">No se han asignado reparaciones</h3>
+                            </div>
+                        )
+                        }
+                        <div className="text-center">
                                 <div className="mt-3">
                                         <label htmlFor="select-reparacion" className="form-label d-block">
                                         Selecciona una reparación:
@@ -164,24 +160,22 @@ export default function IngresoView() {
                                         ))}
                                         </select>
                                 </div>
-                                {reparacionSeleccionada && (
-                                        <div className="mt-3 text-success">
-                                        <strong>Precio: </strong> ${reparacionSeleccionada.precio}
-                                        <div className="mt-2">
-                                            <button 
-                                                type="button" 
-                                                className="btn btn-primary"
-                                                onClick={handleAsignarReparacion}
-                                                disabled={cargando}
-                                            >
-                                                {cargando ? "Guardando..." : "Asignar Reparación"}
-                                            </button>
+                                    {reparacionSeleccionada && (
+                                            <div className="mt-3 text-success">
+                                            <strong>Precio: </strong> ${reparacionSeleccionada.precio}
+                                            <div className="mt-2">
+                                                <button 
+                                                    type="button" 
+                                                    className="btn btn-primary"
+                                                    onClick={handleAsignarReparacion}
+                                                    disabled={cargando}
+                                                >
+                                                    {cargando ? "Guardando..." : "Asignar Reparación"}
+                                                </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
-                            </div>
-                        )
-                        }
+                                        )}
+                        </div>
                     </div>
                 ) : (
                     <div className="text-center">
