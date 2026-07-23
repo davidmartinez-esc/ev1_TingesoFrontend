@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
 import gestionService from "../services/gestion.service.js";
 
 export default function CrearIngresoRefactor() {
@@ -39,10 +40,10 @@ export default function CrearIngresoRefactor() {
       setFechaRecogida("");
       setHoraRecogida("");
 
-      alert("Ingreso creado con exito");
+      toast.success("Ingreso creado con exito");
     }catch(error) {
       console.log(error);
-      alert("Error al crear el ingreso.");
+      toast.error("Error al crear el ingreso.");
     }
 
   }

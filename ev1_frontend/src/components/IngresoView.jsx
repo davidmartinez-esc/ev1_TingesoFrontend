@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 import rdrService from "../services/reparacionesDecuentosRecargos.service";
 import gestionService from "../services/gestion.service";
+
 export default function IngresoView() {
     const {idIngreso} = useParams();
 
@@ -30,6 +32,17 @@ export default function IngresoView() {
 
         setReparacionSeleccionada(reparacionEncontrada || null);
     };
+
+    async function deleteAsignacion(idAsignacion){
+        try{      
+          const response = await rdrService.borrarReparacionAsignada(parseInt(idAsignacion));
+          fetchReparaciones();
+          toast.success("Se borró la reparacion asignada con exito");
+
+        }catch(error) {      
+          toast.error("Se hubo un error al borrar la reparacion asignada");
+        }
+    };
     async function fetchIngreso() {    
         try{
             const response = await gestionService.getIngresoById(idIngreso)            
@@ -37,7 +50,7 @@ export default function IngresoView() {
             console.log(response.data); 
                             
         }catch(error) {
-            alert("Error al obtener al ingreso");
+          toast.error("Error al obtener al ingreso");
         }
     }
 
@@ -48,7 +61,7 @@ export default function IngresoView() {
             console.log(response.data); 
                             
         }catch(error) {
-            alert("Error al obtener las reparaciones del ingreso");
+            toast.error("Error al obtener las reparaciones del ingreso");
         }
     }
     async function handleAsignarReparacion(e) {
@@ -58,11 +71,10 @@ export default function IngresoView() {
         const response = await rdrService.asignarReparacionesAIngreso(parseInt(idIngreso),parseInt(reparacionSeleccionada.repId))
 
         setReparacionSeleccionada(0);
-        alert("Reparación guardada con exito");
+        toast.success("Reparación asignada con exito");
         await fetchReparaciones();
         }catch(error) {
-        console.log(error);
-        alert("Error al crear la reparacion.");
+            toast.error("Error al crear la reparacion.");
         }finally{
             setCargando(false)
         }
@@ -75,7 +87,7 @@ export default function IngresoView() {
             console.log(response.data); 
                             
         }catch(error) {
-            alert("Error al obtener las reparaciones disponibles");
+            toast.error("Error al obtener las reparaciones disponibles");
         }
     }
 
@@ -125,7 +137,16 @@ export default function IngresoView() {
                                 <tbody>     
                                     {reparaciones.map((reparacion, index) => (
                                         <tr key={reparacion.repId || index} className="shadow-sm card-row">
-                                            <td>{reparacion.nombreDeLaRep}</td>
+                                            <td className="d-flex justify-content-between align-items-center">
+                                                <span>{reparacion.nombreDeLaRep}</span>
+                                                <button 
+                                                    type="button" 
+                                                    className="btn btn-sm btn-danger" 
+                                                    onClick={() => deleteAsignacion(reparacion.idAsignacion)}
+                                                >
+                                                    Borrar
+                                                </button>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -139,42 +160,65 @@ export default function IngresoView() {
                             </div>
                         )
                         }
-                        <div className="text-center">
-                                <div className="mt-3">
-                                        <label htmlFor="select-reparacion" className="form-label d-block">
-                                        Selecciona una reparación:
+                        <div className="row g-4 mt-4">
+                            {/* Columna izquierda - Asignar nueva reparación */}
+                            <div className="col-md-6">
+                                <div className="card shadow-sm">
+                                    <div className="card-body">
+                                        <h5 className="card-title mb-3">Asignar Nueva Reparación</h5>
+                                        
+                                        <label htmlFor="select-reparacion" className="form-label">
+                                            Selecciona una reparación:
                                         </label>
                                         
                                         <select 
-                                        id="select-reparacion"
-                                        className="form-select w-50 mx-auto" 
-                                        value={reparacionSeleccionada ? reparacionSeleccionada.repId:""}
-                                        onChange={handleReparacionChange}
+                                            id="select-reparacion"
+                                            className="form-select mb-3" 
+                                            value={reparacionSeleccionada ? reparacionSeleccionada.repId:""}
+                                            onChange={handleReparacionChange}
                                         >
-                                        <option value="">-- Seleccionar --</option>
-                                        
-                                        {reparacionesDisponibles.map((reparacion) => (
-                                            <option key={reparacion.repId} value={reparacion.repId}>
-                                            {reparacion.nombreDeLaRep} - ${reparacion.precio}
-                                            </option>
-                                        ))}
+                                            <option value="">-- Seleccionar --</option>
+                                            
+                                            {reparacionesDisponibles.map((reparacion) => (
+                                                <option key={reparacion.repId} value={reparacion.repId}>
+                                                    {reparacion.nombreDeLaRep} - ${reparacion.precio}
+                                                </option>
+                                            ))}
                                         </select>
-                                </div>
-                                    {reparacionSeleccionada && (
-                                            <div className="mt-3 text-success">
-                                            <strong>Precio: </strong> ${reparacionSeleccionada.precio}
-                                            <div className="mt-2">
+
+                                        {reparacionSeleccionada && (
+                                            <div className="mt-3 p-3 bg-light rounded">
+                                                <p className="mb-2"><strong>Precio: </strong>${reparacionSeleccionada.precio}</p>
                                                 <button 
                                                     type="button" 
-                                                    className="btn btn-primary"
+                                                    className="btn btn-primary w-100"
                                                     onClick={handleAsignarReparacion}
                                                     disabled={cargando}
                                                 >
                                                     {cargando ? "Guardando..." : "Asignar Reparación"}
                                                 </button>
-                                                </div>
                                             </div>
                                         )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Columna derecha - Calcular costo final */}
+                            <div className="col-md-6">
+                                <div className="card shadow-sm">
+                                    <div className="card-body d-flex flex-column justify-content-center">
+                                        <h5 className="card-title mb-3">Costo Total</h5>
+                                        <p className="text-muted mb-4">Calcula el costo final de todas las reparaciones asignadas, aplicando recargos, descuentos y bonos</p>
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-success btn-lg"
+                                            onClick={() => console.log('Calcular costo')}
+                                        >
+                                            Calcular Costo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ) : (

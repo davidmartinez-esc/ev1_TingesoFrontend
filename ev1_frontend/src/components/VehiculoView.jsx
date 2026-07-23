@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
 import gestionService from "../services/gestion.service";
 
 export default function VehiculoView() {
@@ -22,7 +23,7 @@ export default function VehiculoView() {
             console.log(response.data); 
                             
         }catch(error) {
-            alert("Error al obtener el vehiculo");
+            toast.error("Error al obtener el vehiculo");
         }
     }
 
@@ -33,10 +34,10 @@ export default function VehiculoView() {
     
      
     
-          alert("Se borró el ingreso a reparacion con exito");
+          toast.success("Se borró el ingreso a reparacion con exito");
           window.location.reload();
         }catch(error) {      
-          alert("Error al borrar el ingreso a reparacion");
+          toast.error("Error al borrar el ingreso a reparacion");
         }
       }
 
@@ -45,7 +46,7 @@ export default function VehiculoView() {
           const response = await gestionService.getIngresosByIdVehiculo(idVehiculo);  
           setIngresos(response.data);
         }catch(error) {
-          alert("Error al obtener a los ingresos a reparacion.");
+          toast.error("Error al obtener a los ingresos a reparacion.");
         }
       }
 

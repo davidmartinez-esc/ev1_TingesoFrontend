@@ -32,4 +32,14 @@ function asignarReparacionesAIngreso(idIngreso,idReparacion){
     }
   })
 }
-export default {getReparacionesByIdIngreso,getReparacionesDisponibles,getReparacionesDisponiblesByIdIngreso,asignarReparacionesAIngreso}
+
+function borrarReparacionAsignada(idAsignacion){  
+  return axios.delete(`${INGRESO_API_URL}/borrarReparacionAsignada`,{
+    params:{
+      idAsignacion: idAsignacion
+
+    }
+  })
+}
+export default {getReparacionesByIdIngreso,getReparacionesDisponibles,
+  getReparacionesDisponiblesByIdIngreso,asignarReparacionesAIngreso,borrarReparacionAsignada}

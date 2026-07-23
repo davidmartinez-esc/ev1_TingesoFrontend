@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import gestionService from "../services/gestion.service.js";
+import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
-import '../css/ListaVehiculos.css'
 import { useNavigate } from "react-router-dom";
+
+import gestionService from "../services/gestion.service.js";
+import '../css/ListaVehiculos.css'
 export default function ListaVehiculos() {
   const [vehiculos, setVehiculos] = useState([]);
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ export default function ListaVehiculos() {
       const response = await gestionService.getVehiculos();  
       setVehiculos(response.data);
     }catch(error) {
-      alert("Error al obtener a los vehiculos.");
+      toast.error("Error al obtener a los vehiculos.");
     }
   }
 
@@ -22,10 +24,10 @@ export default function ListaVehiculos() {
 
  
 
-      alert("Se borró el vehiculo con exito");
+      toast.success("Se borró el vehiculo con exito");
       window.location.reload();
     }catch(error) {      
-      alert("Error al borrar el vehiculo");
+      toast.error("Error al borrar el vehiculo");
     }
   }
   

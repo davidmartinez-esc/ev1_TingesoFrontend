@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { toast } from 'react-toastify';
 import gestionService from "../services/gestion.service.js";
 
 export default function CrearVehiculoRefactor() {
@@ -30,9 +31,9 @@ export default function CrearVehiculoRefactor() {
         anio_Fabricacion:0
       })
 
-      alert("Vehiculo con patente: " + response.data.patente + " creado con exito");
+      toast.success("Vehiculo con patente: " + response.data.patente + " creado con exito");
     }catch(error) {      
-      alert("Error al crear el vehiculo");
+      toast.error("Error al crear el vehiculo");
     }
   }
 
@@ -45,7 +46,7 @@ export default function CrearVehiculoRefactor() {
 
   return (
     <div className="container">
-      <h1 className="mb-4">Registrar Automovil</h1>
+      <h1 className="mb-4">Registrar Automóvil</h1>
       <form className="border row g-3 px-4">
         <div className="col-md-6">
           <label 
